@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>味噌・みりん・しょうゆスイーツ比較表</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* Layout: 参考表と同じ横長の比較表。素材フィルタ＋1商品1行、売上規模列を追加 */
+:root{
+  --bg:#f7f6f2; --surface:#ffffff; --fg:#2a2c26; --muted:#7a7a70; --line:#e4e2da;
+  --head:#3f463c; --head-fg:#ffffff;
+  --miso:#8a5a2b; --mirin:#a8862a; --shoyu:#5b3a2e;
+  --ec-good:#4f7a4a; --ec-ok:#6f8f4e; --ec-mid:#b5862b; --ec-bad:#9a5a4a;
+  --link:#3c5aa6; --note-bg:#efede6;
+  --font:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1b1c19; --surface:#23251f; --fg:#e8e6df; --muted:#a3a197; --line:#36382f;
+  --head:#3b4237; --head-fg:#f2f1ec; --miso:#d39a62; --mirin:#d8b75a; --shoyu:#c58f78;
+  --link:#8fa8ec; --note-bg:#2a2c26; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#1b1c19; --surface:#23251f; --fg:#e8e6df; --muted:#a3a197; --line:#36382f;
+  --head:#3b4237; --head-fg:#f2f1ec; --miso:#d39a62; --mirin:#d8b75a; --shoyu:#c58f78;
+  --link:#8fa8ec; --note-bg:#2a2c26; color-scheme:dark;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.65}
+.wrap{padding:28px 24px 48px}
+h1{font-size:26px;margin:0 0 6px;font-weight:700;text-wrap:balance}
+.sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.filters button{font:inherit;font-size:13px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--head);color:var(--head-fg);border-color:var(--head)}
+.filters button:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:1480px}
+th{background:var(--head);color:var(--head-fg);font-weight:700;text-align:center;padding:14px 10px;font-size:14px;white-space:nowrap}
+td{border-top:1px solid var(--line);padding:16px 10px;vertical-align:top}
+td.c{text-align:center}
+.no{color:var(--muted);font-variant-numeric:tabular-nums;width:40px}
+.photo{width:190px}
+.photo a{display:block;width:170px;height:170px;border-radius:6px;overflow:hidden;background:var(--note-bg);margin:0 auto}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .ph{display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:12px;text-align:center;padding:8px}
+.cat{font-size:12px;font-weight:500}
+.cat.miso{color:var(--miso)} .cat.mirin{color:var(--mirin)} .cat.shoyu{color:var(--shoyu)}
+.name{font-size:17px;font-weight:700;line-height:1.45;margin:2px 0 4px}
+.maker,.mat{color:var(--muted);font-size:13px}
+.price{width:170px;font-weight:700;font-variant-numeric:tabular-nums}
+.price small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
+.desc{width:260px}
+.where{width:220px}
+.ec{display:inline-block;color:#fff;font-size:12px;padding:1px 10px;border-radius:999px;margin-bottom:6px}
+.ec.e1{background:var(--ec-good)} .ec.e2{background:var(--ec-ok)} .ec.e3{background:var(--ec-mid)} .ec.e4{background:var(--ec-bad)}
+.review{width:230px}
+.sales{width:180px}
+.sales b{display:block}
+.sales .na{color:var(--muted)}
+.link{width:64px}
+.link a{color:var(--link)}
+.notes{margin-top:20px;background:var(--note-bg);padding:14px 18px;font-size:13px;color:var(--fg)}
+.notes h2{font-size:14px;margin:0 0 6px}
+.notes ul{margin:0;padding-left:1.2em}
+@media (max-width:600px){.wrap{padding:20px 16px 40px} h1{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>発酵×スイーツ 比較表（味噌・みりん・しょうゆ編）</h1>
+  <p class="sub">作成日 2026-10-01 ／ EC：◎通販で今買える ○通販あり（一部品切れ・ふるさと納税等） △店頭中心・要問い合わせ ×店頭のみ ／ 価格・在庫は2026-10-01時点の各ページ表示</p>
+  <div class="filters" role="group" aria-label="発酵素材で絞り込み">
+    <button type="button" id="f-all" data-f="all" aria-pressed="true">すべて</button>
+    <button type="button" id="f-miso" data-f="miso" aria-pressed="false">味噌</button>
+    <button type="button" id="f-mirin" data-f="mirin" aria-pressed="false">みりん</button>
+    <button type="button" id="f-shoyu" data-f="shoyu" aria-pressed="false">しょうゆ</button>
+  </div>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>No</th><th>写真</th><th>商品</th><th>価格（税込）</th><th>商品説明</th><th>買える場所</th><th>口コミ・評価</th><th>売上規模</th><th>リンク</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <div class="notes">
+    <h2>補足</h2>
+    <ul>
+      <li>売上規模は、商品単位の販売数・売上が公開されているものがほとんどありませんでした。数値がないものは「非公開」とし、参考になるメーカー情報を併記しています。</li>
+      <li>参考：味噌まんじゅうの新井屋（栃木・佐野）は「年間70万個・売上の9割」と公表していますが、2011年の自社発表で現行ページを確認できなかったため表からは外しています。</li>
+      <li>ヤマロク醤油（小豆島）の醤油プリン・アイスは蔵併設の茶屋のみ、岡直三郎商店の醤油あいすは売り切れ中のため掲載していません。</li>
+      <li>写真は各商品ページの画像を直接読み込んでいます。表示されない場合はリンク先でご確認ください。</li>
+    </ul>
+  </div>
+</div>
+<script>
+const D=[
+ // ---- 味噌 ----
+ {f:"miso",cat:"白味噌×焼き菓子",name:"松風（まつかぜ）",maker:"亀屋陸奥（京都・西本願寺前）",mat:"白味噌",
+  price:"¥1,790（24枚入）",pnote:"8枚入¥700／16枚入¥1,200。2026/10 公式BASE",
+  desc:"小麦粉・砂糖・麦芽飴に白味噌を合わせたもっちり生地に、ケシの実をのせて焼いた室町期からの銘菓。常温・賞味期限は製造日含め10日。",
+  ec:1,where:"本店、公式オンラインストア、高島屋オンライン",
+  review:"高島屋オンライン4.5点（9件）。三越伊勢丹「菓遊庵」焼き菓子ランキング2位（2026/5、ねとらぼ）",
+  sales:null,salesNote:"",url:"https://store.kameyamutsu.jp/items/155652379",
+  img:"https://baseec-img-mng.akamaized.net/images/item/origin/d9eb084d342adf6d86c9275e72febc3d.jpg?imformat=generic&q=90&im=Resize,width=600,type=normal"},
+ {f:"miso",cat:"八丁味噌×焼き菓子",name:"八丁味噌のマドレーヌ",maker:"カクキュー八丁味噌（愛知・岡崎）",mat:"八丁味噌（豆味噌）",
+  price:"¥290（1個）",pnote:"2026/10 カクキュー公式通販",
+  desc:"熟成八丁味噌をたっぷり練り込み、焼成後も赤味噌の香りとコクが残るマドレーヌ。賞味期限1ヶ月。同ショップに味噌キャラメル等もあり。",
+  ec:1,where:"カクキュー直営売店、公式オンラインショップ（在庫あり）",
+  review:"商品レビュー表示なし。1645年創業の八丁味噌の老舗",
+  sales:null,salesNote:"メーカー売上高も非公開（従業員56名・2014年時点）",url:"https://www.kakukyu.jp/shopping/item.asp?id=10967",
+  img:"https://www.kakukyu.jp/img2/item/120_10967.jpg"},
+ {f:"miso",cat:"八丁味噌×和菓子",name:"名古屋八丁みそまん",maker:"春華堂（静岡・浜松）",mat:"八丁味噌（カクキュー製）",
+  price:"¥893（6個入）",pnote:"2個入¥297。2026/10 春華堂公式EC",
+  desc:"皮に八丁味噌を練り込み、北海道産小豆のこし餡を包んだ甘じょっぱいまんじゅう。約30年のロングセラー。賞味期限は製造日から15日。",
+  ec:1,where:"浜松の直営店、グランドキヨスク名古屋、公式EC",
+  review:"名古屋市公式観光サイト「名古屋コンシェルジュ」でお土産として紹介",
+  sales:null,salesNote:"会社全体ではうなぎパイが売上の約8割（Newsweek日本版）",url:"https://ec.shunkado.co.jp/i/1037",
+  img:"https://ec.shunkado.co.jp/img/item/shunkado/thums_misoman_hacchou6-2.png"},
+ {f:"miso",cat:"味噌×せんべい",name:"みそ入大垣せんべい 厚焼",maker:"田中屋せんべい総本家（岐阜・大垣）",mat:"自家製米みそ",
+  price:"¥756（4枚入）",pnote:"化粧箱5枚¥1,188〜。2026/10 公式STORES",
+  desc:"小麦粉・砂糖・自家製味噌・胡麻だけで作る卵不使用の甘い瓦せんべい。1枚ずつ手焼きし艶出しした硬めの食感。賞味期限90日。",
+  ec:1,where:"直営店、全国の取扱店、公式EC、ふるさと納税（大垣市）",
+  review:"岐阜県推奨観光土産品・審査会奨励賞（H19）。ふるなび5.0（3件）",
+  sales:"同社で今も売上最大の商品",salesNote:"金額・枚数は非公開（ウォーカープラス 2023/7）",url:"https://tanakaya-senbei.stores.jp/items/5c42ac1d2a2862157c401a76",
+  img:"https://imagedelivery.net/QondspN4HIUvB_R16-ddAQ/5c2ee1abc2fc287a73505bec/350d3356f930d8d218e0.jpg/fit=scale-down,w=600"},
+ {f:"miso",cat:"信州味噌×チョコレート",name:"みそチョコレート",maker:"すや亀（長野・善光寺門前）",mat:"信州味噌（善光寺門前みそ粉末）",
+  price:"¥600（70g）",pnote:"2026/10 すや亀公式通販",
+  desc:"台形チョコに味噌パウダーを混ぜ、つぶつぶ食感と甘じょっぱさを両立させた通年商品。28℃以下保存、賞味期限270日（夏季は冷蔵便）。",
+  ec:1,where:"本店、善光寺店、公式EC（みそ菓子カテゴリ）",
+  review:"公式EC星4.0（2件）。同社の「みそソフト」は長野市の味噌めぐりガイドで紹介",
+  sales:null,salesNote:"",url:"https://www.suyakame.com/SHOP/675.html",
+  img:"https://image1.shopserve.jp/suyakame.com/pic-labo/M_chocolat01.jpg"},
+ {f:"miso",cat:"白味噌×チーズケーキ",name:"みそキャラメルチーズケーキ",maker:"峰村醸造（新潟市）",mat:"白味噌（半煮半蒸製法）",
+  price:"¥3,500（1本約400g）",pnote:"2本¥5,800。送料込（税込表記なし）。2026/10 新潟直送計画",
+  desc:"クリームチーズの酸味に、自家製焦がしキャラメルと隠し味の白味噌のコクを重ねた大人向けチーズケーキ。冷凍・賞味期限90日。",
+  ec:1,where:"新潟直送計画、同楽天店、ふるさと納税、蔵併設「くらざしきスイーツ」",
+  review:"商品ページに母の日ギフトの好意的な声。新潟県観光協会ブログで蔵の味噌スイーツを紹介",
+  sales:null,salesNote:"",url:"https://shop.ng-life.jp/s1095/1095-002/",
+  img:"https://shop.ng-life.jp/wp-content/uploads/s1095/s1095_002_a02.jpg"},
+ // ---- みりん ----
+ {f:"mirin",cat:"みりん×焼き菓子",name:"みりん屋さんのバームクーヘン",maker:"九重味淋（愛知・碧南、1772年創業）",mat:"本みりん「九重櫻」",
+  price:"¥1,500（1個 16×16cm）",pnote:"2026/10 九重公式EC。ふるさと納税は寄附¥15,000",
+  desc:"しっとり口どけの生地に、みりんの醸造香と「みりんジュレ」で上品な甘さを加えたバームクーヘン。常温・賞味期限30日。",
+  ec:1,where:"公式EC、楽天公式店、直売店「石川八郎治商店」、ふるさと納税",
+  review:"公式ECレビュー55件・平均4.75。楽天ふるさと納税版4.67（3件）",
+  sales:null,salesNote:"",url:"https://www.kokonoe-shop.com/c/gr1/gr7/20002",
+  img:"https://www.kokonoe-shop.com/product/baumkuchen-9_pc.jpg"},
+ {f:"mirin",cat:"みりん×羊羹",name:"果実の味醂羹（みりんかん）ミニ5個箱",maker:"福光屋（石川・金沢、1625年創業）",mat:"三年熟成 純米本味醂「福みりん」",
+  price:"¥2,192（52g×5個）",pnote:"＋送料¥770。2026/10 楽天公式店",
+  desc:"白あんに本みりんを合わせ、いちじく・杏・干し葡萄・ピスタチオをたっぷり入れた羊羹。お茶にもお酒にも。常温、出荷時賞味120日以上。",
+  ec:1,where:"楽天公式ショップ、直営店（金沢・東京ミッドタウン・玉川高島屋）",
+  review:"楽天レビュー14件・平均4.43",
+  sales:null,salesNote:"福光屋：従業員103名",url:"https://item.rakuten.co.jp/fukumitsuya-shop/620249/",
+  img:"https://shop.r10s.jp/fukumitsuya-shop/cabinet/sp/kan_01.jpg"},
+ {f:"mirin",cat:"みりん×ジャム",name:"ストロベリー＆みりんコンフィチュール",maker:"平岩いちご農園（岐阜・川辺町）",mat:"白扇酒造の熟成本みりん「福来純」",
+  price:"ふるさと納税 寄附¥9,000（150g×2個）",pnote:"みりん版1個＋ベリーミックス1個。2026/10 ふるさとチョイス",
+  desc:"自家栽培の紅ほっぺを、砂糖の代わりに地元・白扇酒造の熟成本みりんで甘みづけした手作りジャム。賞味期限は製造から6ヶ月。",
+  ec:2,where:"ふるさと納税（川辺町）中心。一般ECでの単品販売は未確認",
+  review:"食べるJAPAN美味アワード2023 JALふるさとプロジェクト賞",
+  sales:null,salesNote:"",url:"https://www.furusato-tax.jp/product/detail/21503/6349265",
+  img:"https://img.furusato-tax.jp/cdn-cgi/image/width=750,height=466,fit=pad,format=auto/img/unresized/x/product/details/20251024/sd1_6f0db8a6ea023879f0a9e7b7a3062c6101a4a30e.jpg"},
+ {f:"mirin",cat:"みりん粕（伝統菓子）",name:"みりん粕 福来純 こぼれ梅",maker:"白扇酒造（岐阜・川辺町）※販売：佐野みそ",mat:"福来純本みりんの搾り粕",
+  price:"¥768（500g）",pnote:"2026/10 楽天「佐野みそ亀戸本店」",
+  desc:"みりんを搾った後の粕で、昔はそのまま菓子として食べられていたもの。クッキー・パン・甘酒の材料にも。冷暗所保存。酒類扱い。",
+  ec:1,where:"楽天「佐野みそ亀戸本店」",
+  review:"楽天レビュー13件・平均4.77",
+  sales:null,salesNote:"",url:"https://item.rakuten.co.jp/miso-sano/1004126/",
+  img:"https://shop.r10s.jp/miso-sano/cabinet/05608546/imgrc0105117986.jpg"},
+ {f:"mirin",cat:"みりん×アイス",name:"DEN+EN ICE CREAM 三河みりん＆カカオ",maker:"BEAT ICE（神奈川・葉山）",mat:"角谷文治郎商店の三河みりん",
+  price:"¥3,340〜（91ml×複数）",pnote:"2021 Makuakeのリターン価格（終了）",
+  desc:"お米を主原料にしたヴィーガンアイスに、三河みりんとカカオを合わせ、みりんの甘みとコクを活かした一品。",
+  ec:3,where:"Makuake（2021/10終了）。現在の販売状況は要確認",
+  review:"Makuake：サポーター613人、目標30万円に対し約1,391%",
+  sales:"Makuake 約417万円",salesNote:"613人・2021年。その後は非公開",url:"https://www.makuake.com/project/den-en_icecream/",
+  img:"https://static.makuake.com/upload/project/19439/main_19439.jpg?version=1634090407&width=690&height=388"},
+ // ---- しょうゆ ----
+ {f:"shoyu",cat:"醤油×プリン",name:"しょうゆプリン",maker:"北伊醤油（福岡・糸島、明治30年創業）",mat:"4年熟成の再仕込み醤油",
+  price:"¥2,460（100g×6個）",pnote:"2026/10 エンニチ。公式は6個¥2,790",
+  desc:"糸島産朝採り卵と生乳「伊都のめぐみ」に醤油を合わせた、甘さ控えめで濃厚なのに軽いプリン。要冷蔵・賞味期限1ヶ月。",
+  ec:1,where:"本社直売、伊都菜彩、福岡のスーパー（サニー・イオン等）、エンニチ、公式通販",
+  review:"地域メディア「福岡よかもん」で紹介（2021）。ECレビューは0件",
+  sales:null,salesNote:"北伊醤油：被保険者9名規模",url:"https://www.ennichi-japan.com/item/detail/439/",
+  img:"https://image.ibank.platform.cloudec.jp/ax-commerce-image-s3-ibank/item_439_kv_439_kitaishoyu_001.jpg"},
+ {f:"shoyu",cat:"醤油×プリン",name:"しょうゆプリン",maker:"黒澤醤油（茨城、1905年創業）",mat:"木桶仕込み醤油「仁右衛門」",
+  price:"¥350（1個）",pnote:"贈答4個入¥1,620＋クール便¥330。2026/10 公式",
+  desc:"茨城県産の木桶で熟成させた自社醤油を使った、濃厚でやさしい味わいのプリン。クール便発送。同店で醤油アイスも販売。",
+  ec:1,where:"公式オンラインショップ（在庫あり）、蔵カフェ",
+  review:"いばらきデザインセレクション2011 知事選定",
+  sales:null,salesNote:"",url:"https://fujini-shouyu.ocnk.net/product/26",
+  img:"https://fujini-shouyu.ocnk.net/data/fujini-shouyu/product/20260801_b50b84.jpg"},
+ {f:"shoyu",cat:"醤油（みたらし）×プリン",name:"みたらし醤油屋プリン",maker:"二反田醤油店（大分・中津）",mat:"自社醤油のみたらしタレ",
+  price:"¥4,320（100g×6個）",pnote:"送料無料。2026/10 公式通販",
+  desc:"創業100年超の醤油蔵が作る、みたらし醤油味のプリン。1個141kcal。冷蔵クール便・賞味期限14日。のし対応あり。",
+  ec:1,where:"公式通販",
+  review:"受賞歴・レビューは確認できず",
+  sales:null,salesNote:"参考：同社のお菓子用醤油のMakuakeは約25万円・102人（2021）",url:"https://www.nitanda.com/sweets/pudding/",
+  img:"https://www.nitanda.com/sweets/pudding/img/pudding_img01.jpg"},
+ {f:"shoyu",cat:"醤油×アイス",name:"醤油アイス 6個セット",maker:"サクラカネヨ／吉村醸造（鹿児島・いちき串木野）",mat:"自社の甘口醤油",
+  price:"¥2,610（6個）",pnote:"2026/10 公式オンラインショップ",
+  desc:"直売所で人気の「みたらし風味の醤油ソフト」をカップアイス化。甘じょっぱく後味さっぱり。冷凍便、北海道・東北・沖縄は配送不可。",
+  ec:1,where:"公式オンラインショップ、直売所",
+  review:"確認できず",
+  sales:null,salesNote:"",url:"https://sakurakaneyo.shop-pro.jp/?pid=168754617",
+  img:"https://img15.shop-pro.jp/PA01159/110/product/168754617.jpg"},
+ {f:"shoyu",cat:"醤油もろみ×焼き菓子",name:"もろみ醤油薫るラングドシャ",maker:"向山製作所（福島・大玉村）",mat:"玉鈴醤油の十年熟成もろみ",
+  price:"¥750（8枚入）",pnote:"2026/10 公式オンラインショップ",
+  desc:"老舗蔵が10年熟成させたもろみを生地に練り込み、ホワイトチョコをサンドしたラングドシャ。常温・発送日から1ヶ月以上。",
+  ec:1,where:"公式オンラインショップ",
+  review:"確認できず（生キャラメルで知られる菓子メーカー）",
+  sales:null,salesNote:"",url:"https://mukaiyama.shop/?pid=170723862",
+  img:"https://img07.shop-pro.jp/PA01379/163/product/170723862.png?cmsp_timestamp=20240624105453"},
+ {f:"shoyu",cat:"醤油×キャラメル",name:"浜田のさしみ醤油キャラメル",maker:"浜田市観光協会（島根・浜田）",mat:"ふじもと醤油の甘口さしみ醤油",
+  price:"¥303（80g・13〜14粒）",pnote:"2026/10 はまっこ市場",
+  desc:"地元でなじみのある甘口さしみ醤油を使い、塩気と甘さを両立したキャラメル。常温（夏は冷蔵便）・賞味期限1年。",
+  ec:2,where:"観光協会の通販「はまっこ市場」、JR浜田駅の店舗（在庫表示は未確認）",
+  review:"レビュー0件",
+  sales:null,salesNote:"",url:"https://www.hamatoku.jp/view/item/000000001176",
+  img:"https://makeshop-multi-images.akamaized.net/hamakkoichib/shopimages/76/11/4_000000001176.jpg"}
+];
+const EC={1:"EC◎",2:"EC○",3:"EC△",4:"EC×"};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const tb=document.getElementById("rows");
+tb.innerHTML=D.map((d,i)=>`<tr data-f="${d.f}">
+ <td class="c no">${i+1}</td>
+ <td class="photo"><a href="${esc(d.url)}" target="_blank" rel="noopener"><img src="${esc(d.img)}" alt="${esc(d.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span class=&quot;ph&quot;>画像はリンク先で確認</span>'"></a></td>
+ <td><div class="cat ${d.f}">${esc(d.cat)}</div><div class="name">${esc(d.name)}</div><div class="maker">${esc(d.maker)}</div><div class="mat">発酵素材：${esc(d.mat)}</div></td>
+ <td class="c price">${esc(d.price)}<small>${esc(d.pnote)}</small></td>
+ <td class="desc">${esc(d.desc)}</td>
+ <td class="where"><span class="ec e${d.ec}">${EC[d.ec]}</span><br>${esc(d.where)}</td>
+ <td class="review">${esc(d.review)}</td>
+ <td class="c sales">${d.sales?`<b>${esc(d.sales)}</b>`:`<span class="na">非公開</span>`}${d.salesNote?`<br><small>${esc(d.salesNote)}</small>`:""}</td>
+ <td class="c link"><a href="${esc(d.url)}" target="_blank" rel="noopener">商品ページ↗</a></td>
+</tr>`).join("");
+document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{
+  const f=b.dataset.f;
+  document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  tb.querySelectorAll("tr").forEach(tr=>tr.hidden=!(f==="all"||tr.dataset.f===f));
+}));
+</script>
+</body>
+</html>
